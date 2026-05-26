@@ -286,15 +286,26 @@ body{background:var(--ink);color:var(--t1);font-family:'Lato',sans-serif;font-we
 .p-disc::after{content:'';position:absolute;inset:7px;border-radius:50%;background:var(--ink)}
 .p-disc-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;z-index:1}
 .p-disc.spinning{animation:discSpin 3s linear infinite}
-.p-info{flex:1;min-width:0}
-.p-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.12em;color:var(--lavender);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;flex:1;min-width:0;}
+.p-info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;}
+.p-title{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.12em;
+  color:var(--lavender);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:none;
+  flex:1;
+  min-width:0;
+}
 .p-status{font-family:'Lato',sans-serif;font-size:8px;color:var(--t4);margin-top:1px}
 .p-ctrl{display:flex;align-items:center;gap:8px}
 .p-btn{background:none;border:none;color:var(--violet);cursor:pointer;font-size:16px;padding:2px;transition:all .2s}
 .p-btn:hover{color:var(--lavender);transform:scale(1.2)}
 .p-btn#pPlay{width:34px;height:34px;border-radius:50%;border:1px solid rgba(139,56,212,.4);display:flex;align-items:center;justify-content:center;font-size:13px;background:linear-gradient(135deg,var(--lift),var(--glow));color:#fff;}
 .p-btn#pPlay:hover{background:linear-gradient(135deg,var(--rose),var(--violet))}
-.p-progress-area{flex:1;min-width:80px;display:flex;flex-direction:column;gap:3px}
+.p-progress-area{min-width:90px;flex:2}
 .p-seek{-webkit-appearance:none;width:100%;height:2px;background:rgba(90,31,168,.3);border-radius:1px;outline:none;cursor:pointer;}
 .p-seek::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;border-radius:50%;background:var(--lavender);cursor:pointer;}
 .p-time{font-family:'Lato',sans-serif;font-size:7px;color:var(--t4);text-align:right}
@@ -416,6 +427,13 @@ textarea.wish-input{vertical-align:top;resize:none;}
 
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:768px){
+.p-time{font-size:7px;display:block;}
+.p-seek{height:3px;}
+  #volPopup{
+  left:auto;
+  right:0;
+  transform:translateX(0);
+}
   #s1{justify-content:center;padding-top:0;padding-bottom:0}
 .hero-wrap{margin-top:-3rem}
 .hero-name{font-size:clamp(4.5rem,18vw,8rem)}
@@ -464,9 +482,34 @@ textarea.wish-input{vertical-align:top;resize:none;}
   .songs-grid{grid-template-columns:repeat(2,1fr)}
   .song-desc{display:none}
   .song-card{padding:1rem 1.2rem}
- #player{width:calc(100vw - 1.6rem);min-width:unset;padding:8px 12px;gap:8px;border-radius:16px;bottom:.8rem;left:50%;transform:translateX(-50%)}
-  .p-vol{display:none}
-  .p-title{max-width:none;}
+ #player{
+  width:calc(100vw - 1.6rem);
+  min-width:unset;
+  padding:8px 10px;
+  gap:6px;
+  border-radius:16px;
+  bottom:.8rem;
+  left:50%;
+  transform:translateX(-50%)
+}
+.p-vol{display:none}
+.p-disc{width:32px;height:32px;flex-shrink:0}
+.p-info{flex:1;min-width:0;overflow:hidden;display:flex;flex-direction:column;justify-content:center;}
+.p-title{
+  font-size:8px;
+  letter-spacing:.06em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+  display:block;
+}
+.p-status{font-size:7px}
+.p-ctrl{gap:4px;flex-shrink:0}
+.p-btn{font-size:14px;padding:1px}
+.p-progress-area{min-width:90px;flex:2}
+.p-bars{display:flex}
+.p-bars .p-bar{width:1.5px;height:12px}
   .wish-form{flex-wrap:wrap}
   .wish-name-inp{width:100%;border-right:none;border-bottom:1px solid rgba(139,56,212,.2);}
   .wish-input{width:100%;min-width:0;}
@@ -491,6 +534,19 @@ textarea.wish-input{vertical-align:top;resize:none;}
 
 
 @media(max-width:400px){
+.p-title{
+  font-size:8px;
+  letter-spacing:.06em;
+}
+#player{
+  gap:6px;
+}
+.p-ctrl{
+  gap:5px;
+}
+.p-btn{
+  font-size:13px;
+}
   .hero-name{font-size:clamp(4rem,18vw,6rem)}
   .universe{grid-template-columns:1fr 1fr}
 .u-cell{padding:.8rem .6rem}
@@ -603,7 +659,7 @@ textarea.wish-input{vertical-align:top;resize:none;}
   </div>
   <div style="position:relative;display:flex;align-items:center;">
   <button class="p-btn" id="pVolBtn" onclick="toggleVolSlider()">🔊</button>
-  <div id="volPopup" style="display:none;position:absolute;bottom:48px;left:50%;transform:translateX(-50%);background:rgba(8,1,18,.95);border:1px solid rgba(139,56,212,.3);border-radius:8px;padding:8px 14px;align-items:center;gap:8px;z-index:999;white-space:nowrap;">
+  <div id="volPopup" style="display:none;position:absolute;bottom:48px;right:0;background:rgba(8,1,18,.95);border:1px solid rgba(139,56,212,.3);border-radius:8px;padding:8px 14px;align-items:center;gap:8px;z-index:999;white-space:nowrap;">
     <span style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;color:var(--lavender)" id="volNum">80%</span>
     <input type="range" id="pVol" min="0" max="100" value="80" oninput="setVol(this.value)" style="-webkit-appearance:none;width:80px;height:2px;background:rgba(90,31,168,.3);border-radius:1px;outline:none;cursor:pointer;">
   </div>
@@ -710,7 +766,7 @@ textarea.wish-input{vertical-align:top;resize:none;}
 <section class="sec" id="s5" style="min-height:auto;padding:5.5rem 2rem">
   <span class="section-label r">💌 From the heart</span>
   <h2 class="section-title r d1">A <em>Letter</em> to Afiya</h2>
-  <div class="section-kr r d2">마음을 담아서</div>
+  <div class="section-kr r d2">Rain & You</div>
   <div class="letter-wrap">
     <div class="letter r d3">
       <div class="l-corner tl"></div><div class="l-corner tr"></div>
@@ -750,7 +806,7 @@ textarea.wish-input{vertical-align:top;resize:none;}
 <div class="divider r"><div class="div-line"></div><div class="div-dot">💜</div><div class="div-line"></div></div>
 
 <!-- ══ SCENE 7 — PLAYLIST ══ -->
-<section class="sec" id="s7" style="min-height:auto;padding:5.5rem 2rem;overflow:visible;"
+<section class="sec" id="s7" style="min-height:auto;padding:5.5rem 2rem;overflow:visible;">
   <span class="section-label r">🎵 플레이리스트</span>
   <h2 class="section-title r d1">BTS <em>Playlist</em></h2>
   <div class="section-kr r d2">그녀를 위한 플레이리스트</div>
@@ -763,10 +819,56 @@ textarea.wish-input{vertical-align:top;resize:none;}
   <p class="r d5" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--t3);text-align:center;margin-top:2rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:2.1;">These songs carry the same warmth, strength and magic that you do, Afiya. 💜</p>
 </div>
 <div class="r d5" style="max-width:720px;width:100%;margin:2rem auto 0;position:relative;">
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;color:var(--lavender);text-transform:uppercase;text-align:center;margin-bottom:1rem;">You favorite playlist 💜 Spotify</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;color:var(--lavender);text-transform:uppercase;text-align:center;margin-bottom:1rem;">💜 Afiya's Spotify Playlist</div>
+
+  <!-- Mobile notice -->
+  <div id="mobileNotice" style="display:none;margin-bottom:1.2rem;border:1px solid rgba(184,122,232,.3);background:linear-gradient(135deg,rgba(42,10,98,.7),rgba(24,4,64,.85));padding:1.4rem 1.6rem;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(184,122,232,.5),transparent);"></div>
+    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.45em;color:var(--lavender);text-transform:uppercase;margin-bottom:.6rem;">✦ Listening Experience ✦</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--t1);line-height:1.9;margin-bottom:1.1rem;">
+      Each preview carries the soul of the song —<br/>
+      <span style="color:var(--petal);">tap below to hear the full playlist on Spotify 💜</span>
+    </div>
+    <button onclick="showSpotifyConfirm()" style="display:inline-flex;align-items:center;gap:10px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:#fff;text-decoration:none;background:linear-gradient(135deg,#1DB954,#17a349);padding:12px 28px;border-radius:2px;border:none;cursor:pointer;">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+  Open Full Playlist
+</button>
+
+<!-- Spotify Confirm Popup -->
+<div id="spotifyConfirm" style="display:none;position:fixed;inset:0;background:rgba(4,1,10,.92);z-index:9999;align-items:center;justify-content:center;padding:2rem;">
+  <div style="background:linear-gradient(160deg,rgba(24,4,64,.98),rgba(8,1,18,.99));border:1px solid rgba(139,56,212,.4);max-width:380px;width:100%;padding:2.4rem 2rem;text-align:center;position:relative;">
+    <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(184,122,232,.6),transparent);"></div>
+    <div style="font-size:2rem;margin-bottom:.8rem;">💜</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.4em;color:var(--lavender);text-transform:uppercase;margin-bottom:.8rem;">Wait a minute!</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--t1);line-height:1.9;margin-bottom:1.6rem;">
+     There is so much more waiting for you here! —<br/>
+<span style="color:var(--petal);">Wishes, surprises, and a grand finale! 🎆</span><br/><br/>
+Explore the whole website first,<br/>Then head over to Spotify! 💜
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button onclick="document.getElementById('spotifyConfirm').style.display='none';gs(7);" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;color:#fff;background:linear-gradient(135deg,var(--lift),var(--glow));border:none;padding:13px 24px;cursor:pointer;text-transform:uppercase;transition:all .3s;">
+        💜 Continue Website ↓
+      </button>
+      <button onclick="document.getElementById('spotifyConfirm').style.display='none';window.open('https://open.spotify.com/playlist/09KlFmc96hLO1mQfM9Ve83','_blank');" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;color:rgba(255,255,255,.6);background:none;border:1px solid rgba(139,56,212,.3);padding:11px 24px;cursor:pointer;text-transform:uppercase;transition:all .3s;">
+        Open Spotify
+      </button>
+    </div>
+  </div>
+</div>
+  </div>
+
   <div onclick="stopAllLocal()" style="position:absolute;width:100%;height:60px;z-index:1;cursor:pointer;top:32px;"></div>
   <iframe id="spotifyFrame" style="border-radius:12px;border:1px solid rgba(139,56,212,.3);" src="https://open.spotify.com/embed/playlist/09KlFmc96hLO1mQfM9Ve83?utm_source=generator&theme=1" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 </div>
+
+<script>
+(function(){
+  if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+    var n=document.getElementById('mobileNotice');
+    if(n)n.style.display='block';
+  }
+})();
+</script>
 
 </section>
 
@@ -1552,17 +1654,30 @@ function stopAllLocal(){
   stopTimer();
 }
 function startSong(idx){
-  if(phase1Mode){
-    phase1Mode=false;
-    phase1Aud.pause();
-    phase1Aud.currentTime=0;
-  }
+  if(phase1Mode){phase1Mode=false;phase1Aud.pause();phase1Aud.currentTime=0;}
   if(bdMode){bdAud.pause();bdAud.currentTime=0;bdMode=false;}
-  aud.pause();curIdx=idx;aud.src=SONGS[idx].file;aud.currentTime=0;
-  const p=aud.play();if(p)p.catch(()=>{});isPlaying=true;
+  aud.pause();
+  curIdx=idx;
+  isPlaying=false;
   document.getElementById('pTitle').textContent=SONGS[idx].title+' — BTS';
   document.getElementById('pDisc').querySelector('.p-disc-emoji').textContent=SONGS[idx].emoji||'🎵';
   document.getElementById('player').classList.add('active');
+  document.getElementById('pStatus').textContent='⏳ loading...';
+  aud.src=SONGS[idx].file;
+  aud.load();
+  const onReady=()=>{
+    if(curIdx!==idx)return;
+    aud.removeEventListener('canplay',onReady);
+    const p=aud.play();
+    if(p){
+      p.then(()=>{isPlaying=true;})
+       .catch(()=>{
+         document.getElementById('pStatus').textContent='tap ▶ to play';
+         document.getElementById('pPlay').textContent='▶';
+       });
+    }else{isPlaying=true;}
+  };
+  aud.addEventListener('canplay',onReady,{once:true});
 }
 function uiAllOff(){
   document.querySelectorAll('.song-card').forEach(c=>c.classList.remove('playing'));
@@ -1869,6 +1984,13 @@ document.querySelectorAll('.r,.r-l,.r-r').forEach(el=>ro.observe(el));
   const seq=[38,38,40,40,37,39,37,39,66,65];let pos=0;
   document.addEventListener('keydown',e=>{if(e.keyCode===seq[pos]){pos++;if(pos===seq.length){launchFW();spawnPetals(300);pos=0;}}else pos=0;});
 })();
+function showSpotifyConfirm(){
+  const el=document.getElementById('spotifyConfirm');
+  el.style.display='flex';
+}
+document.getElementById('spotifyConfirm').addEventListener('click',function(e){
+  if(e.target===this)this.style.display='none';
+});
 </script>
 </body>
 </html>
